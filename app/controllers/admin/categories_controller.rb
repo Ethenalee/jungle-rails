@@ -1,14 +1,14 @@
 class Admin::CategoriesController < ApplicationController
 
-    def index
-        @category = Category.order(id: :desc).all
-    end
-    
-    def new
-        @category = Category.new
-    end
-    
-    def create
+  def index
+    @categories = Category.order(id: :desc).all
+  end
+
+  def new
+    @category = Category.new
+  end
+
+  def create
     @category = Category.new(category_params)
 
     if @category.save
@@ -16,20 +16,20 @@ class Admin::CategoriesController < ApplicationController
     else
         render :new
     end
-    end
+  end
 
-    def destroy
+  def destroy
     @category = Category.find params[:id]
     @category.destroy
     redirect_to [:admin, :categories], notice: 'Category deleted!'
-    end
+  end
 
-    private
+  private
 
-    def category_params
+  def category_params
     params.require(:category).permit(
         :name
     )
-    end
+  end
 
 end
