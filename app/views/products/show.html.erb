@@ -22,6 +22,24 @@
           <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
+          <dt>Rating</dt>
+          <dd>
+          <% @reviews.each do |review|  %>
+            <%= review.rating %>
+            <%= review.description %>
+          <% end %>
+          </dd>
+          <div>
+          <%= form_for [@product, @review] do |f| %>        
+            <div class="form-inputs">
+              <% f.text_area :description, required: true, autofocus: true %>
+              <% f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
+            </div>   
+            <div class="form-actions">
+              <% f.button "Create" %>
+            </div>
+          <% end %>
+          </div>
         </dl>
       </div>
     </div>

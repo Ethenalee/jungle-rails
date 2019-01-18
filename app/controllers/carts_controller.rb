@@ -1,6 +1,9 @@
 class CartsController < ApplicationController
 
   def show
+    if cookies[:cart].present? == false || cart_subtotal_cents == 0 then
+      render 'emptycart'
+    end
   end
 
   def add_item

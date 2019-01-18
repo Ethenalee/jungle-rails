@@ -6,6 +6,11 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find params[:id]
+    @reviews = Reviews.where(product_id: params[:id])
+    @review = @product.reviews.build
+    # if rating.save
+    #   redirect_to :back
+    # end
   end
 
 end
