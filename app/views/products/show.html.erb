@@ -31,12 +31,12 @@
           </dd>
           <div>
           <%= form_for [@product, @review] do |f| %>        
-            <div class="form-inputs">
-              <% f.text_area :description, required: true, autofocus: true %>
-              <% f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
-            </div>   
+            
+              Description: <%= f.text_area :description, required: true, autofocus: true %>
+              Rating: <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
+          
             <div class="form-actions">
-              <% f.button "Create" %>
+              <%= f.button "Create" %>
             </div>
           <% end %>
           </div>
