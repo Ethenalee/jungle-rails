@@ -1,13 +1,13 @@
 class Admin::CategoriesController < Admin::BaseController
-  # route: admin_products GET /admin/products(.:format) admin/products#index
+  # route: admin_categories GET /admin/categories(.:format) admin/categories#index
   def index
     @categories = Category.order(id: :desc).all
   end
-  # route: new_admin_product GET /admin/products/new(.:format) admin/products#new
+  # route: new_admin_category GET /admin/categories/new(.:format) admin/categories#new
   def new
     @category = Category.new
   end
-  # route: admin_products POST /admin/products(.:format) admin/products#create
+  # route: admin_categories  POST /admin/categories(.:format) admin/categories#create
   def create
     @category = Category.new(category_params)
     if @category.save
