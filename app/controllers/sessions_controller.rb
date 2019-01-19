@@ -13,12 +13,12 @@ class SessionsController < ApplicationController
       redirect_to '/'
     else
     # If user's login doesn't work, send them back to the login form.
-       redirect_to '/login'
+       redirect_to '/login', notice: "Woops !  email or password is not valid"
     end
   end
   # route:  logout GET /logout(.:format) sessions#destroy
   def destroy
     session[:user_id] = nil
-    redirect_to '/login'
+    redirect_to '/login', notice: "You are successfully logged out"
   end
 end

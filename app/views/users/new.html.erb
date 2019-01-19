@@ -22,7 +22,9 @@
     </div>
       <%= f.submit "Submit" , class: 'btn btn-default'%>
   <% end %>
-  <% flash.each do |name, msg| -%>
-    <%= content_tag :div, msg, class: name %>
-  <% end -%>
+  <div class="flash">
+    <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
+  </div>
 </div>
