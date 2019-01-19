@@ -26,7 +26,7 @@
           <% if @reviews.size == 0 %>
           <dd> No reviews </dd>
           <% end %>
-          <% @reviews.reverse_each do |review|  %>
+          <% @reviews.each do |review|  %>
             <dd>
             <%= review.rating %>
             <%= review.description %>
