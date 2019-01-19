@@ -1,15 +1,15 @@
 <tr>
-    <td>
+  <td>
     <h4><%= category.name %></h4>
+  </td>
+<!-- %= check category how many products have % -->
+  <% if category.products.size == 0 %>
+    <td>
+      <h4> None </h4>
     </td>
-    <% if category.products.size == 0 %>
-      <td>
-        <h4> None </h4>
-      </td>
-    <% else %>
-      <td>
-        <h4><%= category.products.size %> Products</h4>
-      </td>
-    <% end %>
-
+  <% else %>
+    <td>
+      <h4><%= category.products.size %> Products</h4>
+    </td>
+  <% end %>
 </tr>

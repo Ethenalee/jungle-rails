@@ -1,9 +1,17 @@
-<h1>Login</h1>
 
-<%= form_tag '/login' do %>
-
-  Email: <%= text_field_tag :email %>
-  Password: <%= password_field_tag :password %>
-  <%= submit_tag "Submit" %>
-
-<% end %>
+<div class="container">
+  <%= form_tag '/login' do %>
+    <h1>Login</h1>
+    <hr>
+    <label for="email"><b>Email</b></label>
+    <%= text_field_tag :email %>
+    <label for="psw"><b>Password</b></label>
+    <%= password_field_tag :password %>
+    <%= submit_tag "Submit" %>
+  <% end %>
+  <div class="flash">
+    <% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%>
+  </div>
+</div>
