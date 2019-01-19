@@ -8,13 +8,13 @@ class UsersController < ApplicationController
     user = User.new(user_params)
 
     if User.find_by(email: user.email)
-      redirect_to '/signup'
+      redirect_to '/signup', notice: "Email is already used !!!"
     else
       if user.save
         session[:user_id] = user.id
         redirect_to '/'
       else
-        redirect_to '/signup'
+        redirect_to '/signup', notice: "Email is already used !!!"
       end
     end
   end
