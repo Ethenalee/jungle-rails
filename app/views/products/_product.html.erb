@@ -8,6 +8,13 @@
   <p class="description">
     <%= product.description %>
   </p>
+  <p class="rates">
+    <% if product.reviews.size == 0 %>
+    No rates
+    <% else %>
+    Rate: <%= product.reviews.sum(:rating) / product.reviews.size %>
+    <% end %>
+  </p>
   <footer class="actions">
   <!-- %= added conditon do not allow to add cart when there is not any product % -->
     <% if product.quantity == 0 then %>
