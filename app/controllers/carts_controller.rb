@@ -2,6 +2,7 @@ class CartsController < ApplicationController
   # route: cart GET /cart(.:format) carts#show
   def show
     if cookies[:cart].present? == false || cart_subtotal_cents == 0 then
+      # rendered empty cart page when cart is empty
       render 'emptycart'
     end
   end

@@ -1,15 +1,16 @@
 class OrdersController < ApplicationController
-
+  # route: order GET /orders/:id(.:format) orders#show
   def show
     @order = Order.find(params[:id])
   end
-
+  # route:  orders POST /orders(.:format) orders#create
   def create
     charge = perform_stripe_charge
     order  = create_order(charge)
 
     if order.valid?
       empty_cart!
+      # send email to user regarding the order
       UserMailer.order_email(current_user, order).deliver_now
       redirect_to order, notice: 'Your Order has been placed.'
     else
@@ -23,7 +24,6 @@ class OrdersController < ApplicationController
   private
 
   def empty_cart!
-    # empty hash means no products in cart :)
     update_cart({})
   end
 
