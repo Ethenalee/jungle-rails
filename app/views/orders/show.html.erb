@@ -4,7 +4,9 @@
   </header>
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
-    <h4>The email that was used <%= @order.email %></h4>
+    <% if current_user %>
+      <h4>The email that was used <%= current_user.email %></h4>
+    <% end %>
   </div>
   <div class="panel panel-default products">
     <table class="table table-bordered">
