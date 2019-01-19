@@ -22,6 +22,14 @@ Use Credit Card # 4111 1111 1111 1111 for testing success scenarios.
 
 More information in their docs: <https://stripe.com/docs/testing#cards>
 
+## Email Preview
+option 1. Run rails console in command line
+After placing an order through http://localhost:3000, run the following in console: UserMailer.order_email(User.last, Order.last).deliver_now 
+This should output an HTML code view to be sent to the user.
+option 2. You can check test preview through http://localhost:3000/rails/mailers/user_mailer/order_email
+(tested with first user, first order)
+
+
 ## Dependencies
 
 * Rails 4.2 [Rails Guide](http://guides.rubyonrails.org/v4.2/)
