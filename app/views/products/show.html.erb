@@ -1,58 +1,51 @@
 <section class="products-show">
-
   <header class="page-header">
     <h1><%= link_to @product.category.name, @product.category %> &raquo; <%= @product.name %></h1>
   </header>
-
   <article class="product-detail">
-
     <div class="row">
-
       <div class="col-sm-4">
         <%= image_tag @product.image.url, class: 'main-img' %>
       </div>
-
       <div class="col-sm-8">
         <dl class="dl-horizontal">
           <dt>Name</dt>
-          <dd><%= @product.name %></dd>
+            <dd><%= @product.name %></dd>
           <dt>Description</dt>
-          <dd><%= @product.description %></dd>
+            <dd><%= @product.description %></dd>
           <dt>Quantity</dt>
-          <dd><%= @product.quantity %></dd>
+            <dd><%= @product.quantity %></dd>
           <dt>Price</dt>
-          <dd><%= @product.price %></dd>
+            <dd><%= @product.price %></dd>
           <dt>Rating</dt>
-          <% if @reviews.size == 0 %>
-          <dd> No reviews </dd>
-          <% end %>
-          <% @reviews.each do |review|  %>
-            <dd>
-            <%= review.rating %>
-            <%= review.description %>
+            <% if @reviews.size == 0 %>
+              <dd> No reviews </dd>
+            <% end %>
+            <% @reviews.each do |review|  %>
+              <dd>
+                <%= review.rating %>
+                <%= review.description %>
+                <% if current_user %>
+                  <% if review.user_id == current_user.id %>
+                    <%= link_to fa_icon('trash'), product_review_path(review.product_id, review.id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+                  <% end %>
+                <% end %>
+              </dd>
+            <% end %> 
             <% if current_user %>
-            <% if review.user_id == current_user.id %>
-            <%= link_to fa_icon('trash'), product_review_path(review.product_id, review.id), class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+              <div>
+                <%= form_for [@product, @review] do |f| %>        
+                  <div>
+                    <%= f.hidden_field :user_id, :value => current_user.id %>
+                    Description: <%= f.text_area :description, required: true, autofocus: true %>
+                    Rating: <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
+                    <%= f.submit "Create" %>
+                  </div>
+                <% end %>
+              </div>
             <% end %>
-            <% end %>
-            </dd>
-          <% end %> 
-          <% if current_user %>
-          <div>
-          <%= form_for [@product, @review] do |f| %>        
-            <div>
-              <%= f.hidden_field :user_id, :value => current_user.id %>
-              Description: <%= f.text_area :description, required: true, autofocus: true %>
-              Rating: <%= f.select :rating, options_for_select([1, 2, 3, 4, 5]) %>
-              <%= f.submit "Create" %>
-            </div>
-          <% end %>
-          </div>
-          <% end %>
         </dl>
       </div>
     </div>
-
   </article>
-
 </section>
