@@ -23,6 +23,9 @@
           <dt>Price</dt>
           <dd><%= @product.price %></dd>
           <dt>Rating</dt>
+          <% if @reviews.size == 0 %>
+          <dd> No reviews </dd>
+          <% end %>
           <% @reviews.reverse_each do |review|  %>
             <dd>
             <%= review.rating %>
