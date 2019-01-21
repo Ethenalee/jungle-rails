@@ -16,7 +16,6 @@ RSpec.describe User, type: :model do
         record.valid?
         expect(record.errors[:name]).not_to include 'AError'
       end
-    end
 
     it 'has a password' do
       record = User.new
@@ -96,8 +95,23 @@ RSpec.describe User, type: :model do
       expect(record.errors[:password]).not_to include 'AError'
 
     end
+  end
 
-    describe '.authenticate_with_credentials' do
-      # examples for this class method here
+  describe 'authenticate_with_credentials' do
+    it 'email validation' do
+      record1 = User.new
+      record1.name = 'foo boo'
+      record1.password = 'fooboo'
+      record1.password_confirmation = 'fooboo'
+      record1.email = 'ethena@text.com' # invalid state
+      saved = record1.save
+      expect(saved).to eql(true)
+
+      expect(User.authenticate_with_credentials('ethena@text.com', 'fooboo')).to be_present
+      expect(User.authenticate_with_credentials('Ethena@text.com', 'fooboo')).to be_present
+      expect(User.authenticate_with_credentials(' Ethena@text.com', 'fooboo')).to be_present
     end
+  end
+
+    
 end
