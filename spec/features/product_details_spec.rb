@@ -22,7 +22,7 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
 
     # VERIFY
     expect(page).to have_css 'article.product-detail'
-
+    expect(page).to have_css '.main-img'
     save_screenshot
     # Arrange
     # Act
